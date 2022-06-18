@@ -35,7 +35,7 @@ export default function Home(){
               pageNumber={pages}
             />}
          </div>
-         <br></br>
+         <br/>
          <div>
               {<Order/>}
             </div>
@@ -50,9 +50,8 @@ export default function Home(){
                img={d.img}s
                temperaments={d.temperaments}
                weight={d.weight}
-             /> })
+             />})
           }</div>
-           
            {/* <div>{<SearchBar/>}</div>
             <Link to='/createdog'>Create un perro</Link> */}
         </div>

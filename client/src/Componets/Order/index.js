@@ -39,6 +39,7 @@ let filterBy = (e) =>{
     dispatch(filter(e.target.value))
 }
 let handleChange = (e) =>{
+    e.preventDefault();
     dispatch(filterTem(e.target.value))
 }
 useEffect(()=>{
@@ -66,22 +67,28 @@ return(
       <button
        className='Boton'
        value='DATABASE'
+       type='submit'
        onClick={(e) => filterBy(e)}
       >perros creados</button>
       <button
       className='Boton'
       value='ALL'
+      type='submit'
       onClick={(e) => allDogs(e)}
       >todos los peroos</button>
+
       <select
       className='seleccion'
       onChange={(e) => handleChange(e)}>
-         <option>Temperaments</option>
-        {allTemp && allTemp.map(t=>(
-            <option
+        <option
+         value='all'
+        >ALL</option>
+        { allTemp.map(t =>(
+        <option
             value={t.name}
             key={t.id}
-            >{t.name}</option>
+            >{t.name}
+        </option>
         ))}
       </select>
     </div>)

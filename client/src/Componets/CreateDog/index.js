@@ -12,7 +12,7 @@ let error={}
   if(!input.name){
   error.name = 'Name is invalid porque tiene que ser mayor a 3 caracteres y menor a 20'
   }
-  else if(input.heigth <15 && input.heigth >110 ){
+  else if(input.heigth < 15 && input.heigth >110 ){
     error.heigth= 'altura require the un number mayor a 15 y menor a  110'
   } else{
     error.heigth='ok'
@@ -27,21 +27,19 @@ let error={}
 }
 
 export default function CreateDog(){
-    
-    let dispatch= useDispatch()
-    let  temperaments = useSelector((state) => state.temperaments)
+    let dispatch = useDispatch()
+    let temperaments = useSelector((state) => state.temperaments)
     const history = useHistory()
     let [closenTemps, setClosenTemps] = useState([])
+    let[error, setError] = useState({})
     let[input, setInput] = useState({
         name:'',
-        heigth: Number(),
-        weight:  Number(),
-        life_span:  Number(),
+        heigth:Number(),
+        weight:Number(),
+        life_span:Number(),
         img: '',
-        temperament: [],
+        temperament:[],
     });
-    let[error, setError] = useState({})
-
     useEffect(()=>{
         dispatch(getTemperaments())
     }, [dispatch])
@@ -49,8 +47,8 @@ export default function CreateDog(){
     const handleChange =(e) =>{
         e.preventDefault();
         setInput(prev => ({...prev, [e.target.name]: e.target.value})) 
-        //validamos la info 
-        let objError = Validate({...input, [e.target.value]: e.target.value})
+      
+        let objError = Validate({...input, [e.target.name]: e.target.name})
         setError(objError)
     }
 
@@ -79,7 +77,7 @@ let handleSubmit = (e) =>{
             weight:Number(),
             life_span: Number(),
             image:'',
-            temperament: [],
+            temperament:[],
         })
         alert('Tu mascota fue creada con exito!!')
         history.push('/home')

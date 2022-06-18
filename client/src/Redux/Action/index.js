@@ -98,8 +98,8 @@ export const orderZA = () => async (dispach)=>{
 export const weightZA =() => async (dispach)=>{
     const response = await axios.get('http://localhost:3001/dogs');
     const aWeight = response.date.sort((b,a)=>{
-        if(parseInt(a.weight) > parseInt(b.weight)) return 1;
-        if(parseInt(a.weight) < parseInt(b.weight)) return -1;
+        if(Number(a.weight) > Number(b.weight)) return 1;
+        if(Number(a.weight) < Number(b.weight)) return -1;
         return 0;
     })
     dispach({
@@ -111,8 +111,8 @@ export const weightZA =() => async (dispach)=>{
 export const weightAZ = () => async (dispach) => {
     const response = await axios.get('http://localhost:3001/dogs');
     const zWeight = response.data.sort((a,b) =>{
-        if(parseInt(a.weight) > parseInt(b.weight)) return 1;
-        if(parseInt(a.weight) < parseInt(b.weight)) return -1; 
+        if(Number(a.weight) > Number(b.weight)) return 1;
+        if(Number(a.weight) < Number(b.weight)) return -1; 
         return 0;
     })
     dispach({

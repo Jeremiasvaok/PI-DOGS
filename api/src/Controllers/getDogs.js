@@ -19,10 +19,11 @@ const getDogs = async (req,res, next) =>{
             }
         }))
        let dogsdb = await Dog.findAll({
-            include:{
-                model: Temperament,
-               atributes: ['name'],
-            },
+            include: {
+               model: Temperament,
+               atributes:['name']
+
+            }
         }).then(response =>{
             dogdb = response.map((d)=>{
                 return{

@@ -9,7 +9,7 @@ export default function Card({name,id, img, temperaments, weight}){
             <p className="Card-temperament">Temperamensts: {temperaments}</p>
             <p className="Card-weight">Weight: {weight}</p>
             <Link to={`/dogs/${id}`}>
-                <button>Details the dog</button>
+                <button className='button-detalle'>Details the dog</button>
             </Link>
         </div>
     )
