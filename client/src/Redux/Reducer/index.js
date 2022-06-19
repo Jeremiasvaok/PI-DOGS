@@ -48,8 +48,9 @@ function rootReducer(state= initialState, action){
                 temperaments: action.payload
                  }
          case FILTER_TEMPERAMENTS:
-            const filters = action.payload === 'all' ? state.dogs : state.dogs.filter(d => {
-               return d.temperament?.split(',').includes(action.payload)
+            const dogs = state.dogs
+            const filters = action.payload === 'all' ? dogs : dogs.filter(d => {
+               return d.temperament?.includes(action.payload)
             });
             return {
                 ...state,

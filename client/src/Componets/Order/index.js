@@ -38,14 +38,14 @@ let filterBy = (e) =>{
     e.preventDefault();
     dispatch(filter(e.target.value))
 }
-let handleChange = (e) =>{
-    e.preventDefault();
-    dispatch(filterTem(e.target.value))
-}
 useEffect(()=>{
     dispatch(getTemperaments())
 },[dispatch])
 
+let handleChange = (e) =>{
+    e.preventDefault(e);
+    dispatch(filterTem(e.target.value))
+}
 return(
     <div className='Contenedor-principal'>
       <button 
@@ -59,35 +59,29 @@ return(
       <button
       className='Boton'
       onClick={(e)=> weightA(e)}
-      > Weight: - o +</button>
+      > Weight: - o +{console.log('-')}</button>
       <button
       className='Boton'
       onClick={(e)=> weightZ(e)}
-      >Weight:+ o -</button>
+      >Weight:+ o -{console.log('+')}</button>
       <button
        className='Boton'
-       value='DATABASE'
-       type='submit'
+       value='DATEBASE'
        onClick={(e) => filterBy(e)}
-      >perros creados</button>
+      >perros creados{console.log('database')}</button>
       <button
       className='Boton'
       value='ALL'
-      type='submit'
       onClick={(e) => allDogs(e)}
-      >todos los peroos</button>
+      >todos los peroos{console.log('ALL')}</button>
 
-      <select
-      className='seleccion'
-      onChange={(e) => handleChange(e)}>
-        <option
-         value='all'
-        >ALL</option>
-        { allTemp.map(t =>(
+      <select className='seleccion' onChange={(e) => handleChange(e)}>
+        <option value='all'>ALL{console.log('io')}</option>
+        {allTemp && allTemp.map(t =>(
         <option
             value={t.name}
-            key={t.id}
-            >{t.name}
+            key={t.id}>
+         {t.name}
         </option>
         ))}
       </select>

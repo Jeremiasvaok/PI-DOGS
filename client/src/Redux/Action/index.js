@@ -70,7 +70,6 @@ export const filterTem = (payload) =>{
 export const orderAZ = () => async (dispach)=>{
     const response = await axios.get('http://localhost:3001/dogs');
     const aOrder = response.data.sort((a,b) =>{
-        console.log(aOrder)
         if(a.name > b.name) return 1;
         if(a.name < b.name) return -1;
         return 0;
@@ -97,9 +96,9 @@ export const orderZA = () => async (dispach)=>{
 
 export const weightZA =() => async (dispach)=>{
     const response = await axios.get('http://localhost:3001/dogs');
-    const aWeight = response.date.sort((b,a)=>{
-        if(Number(a.weight) > Number(b.weight)) return 1;
-        if(Number(a.weight) < Number(b.weight)) return -1;
+    const aWeight = response.data.sort((b,a)=>{
+        if(parseInt(a.weight) > parseInt(b.weight)) return 1;
+        if(parseInt(a.weight) < parseInt(b.weight)) return -1;
         return 0;
     })
     dispach({
@@ -111,8 +110,8 @@ export const weightZA =() => async (dispach)=>{
 export const weightAZ = () => async (dispach) => {
     const response = await axios.get('http://localhost:3001/dogs');
     const zWeight = response.data.sort((a,b) =>{
-        if(Number(a.weight) > Number(b.weight)) return 1;
-        if(Number(a.weight) < Number(b.weight)) return -1; 
+        if(parseInt(a.weight) > parseInt(b.weight)) return 1;
+        if(parseInt(a.weight) < parseInt(b.weight)) return -1; 
         return 0;
     })
     dispach({
@@ -122,6 +121,10 @@ export const weightAZ = () => async (dispach) => {
 }
 
 export const filter = (value) =>{
-    if(value === 'DATEBASE') return{ type: DATEBASE, }
-    if(value === 'ALL') return{ type: ALL, }
+    if(value === 'DATEBASE') return{ 
+        type: DATEBASE,
+     }
+    if(value === 'ALL') return{
+         type: ALL, 
+        }
 }

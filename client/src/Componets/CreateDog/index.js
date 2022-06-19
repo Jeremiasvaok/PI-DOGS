@@ -17,10 +17,10 @@ let error={}
   } else{
     error.heigth='ok'
   }
-  if(input.weight  <5 && input.weight >82){
+  if(input.weight > 5){
     error.weight ='peso se require con un peso menor a 5 y  mayor a 82'
   }
-  else if(input.life_span <2 && input.life_span > 20){
+  else if(input.life_span > 2){
     error.life_span =' requier una vida mayor a 2 y menor a 20'
   }
   return error

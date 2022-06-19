@@ -52,8 +52,8 @@ export default function Home(){
                weight={d.weight}
              />})
           }</div>
-           {/* <div>{<SearchBar/>}</div>
-            <Link to='/createdog'>Create un perro</Link> */}
+           <div>{<SearchBar/>}</div>
+            <Link to='/createdog'>Create un perro</Link>
         </div>
     )
 }
