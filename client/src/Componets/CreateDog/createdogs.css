@@ -1,7 +1,88 @@
-p.danger{
- color: red;
- font-size: 10px;
+.contenedor-principal{
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    padding: 10px;
 }
-input.danger{
-    border: 2px solid greenyellow;
+
+.botton{
+    text-align:center;
+    margin: 3px;
+    padding:10px;
+    color:rgb(85, 48, 0);
+    cursor: pointer;
+    background-color: rgb(218, 173, 114);
+}
+.botton:hover{
+    transition: 1s;
+  background-color: rgb(85, 48, 0);
+  color:rgb(218, 173, 114) ;
+  margin: 6px;
+  padding: 6px;
+}
+
+.from{
+    background-color: aliceblue;
+    border-radius: 12px;
+    padding: auto;
+    margin: auto;
+    width: 45%;
+}
+.title{
+    color:rgb(209, 93, 72);
+    padding: auto;
+    margin: auto;
+}
+
+.label, .labell{
+    font-weight: 800;
+    color:rgb(209, 93, 72);
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+    padding: auto;
+}
+.imputl{
+    font-weight: 400;
+    color:rgb(104, 79, 11)
+}
+
+.coso{
+    color:black;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+}
+.row{
+    color:red;
+    display: flex;
+    flex-direction: column;
+}
+input{
+    display: inline-block;
+    outline: none;
+    margin: 3px;
+}
+
+.error{
+    display: flex;
+    margin-left: 5%;
+    margin: auto;
+    padding: auto;
+    font-weight: 800;
+}
+.li{
+  color:red; 
+}
+.botonTemp{
+    color:rgb(0, 0, 0);
+    border-radius: 7px;
+    border:rgb(236, 160, 88) solid ;
+    margin: 2px;
+    background-color: rgb(236, 160, 88);
+}
+
+.select{
+    background-color: rgb(207, 243, 250);
 }

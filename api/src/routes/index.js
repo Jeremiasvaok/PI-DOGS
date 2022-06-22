@@ -9,7 +9,7 @@ const router = Router();
 
 router.use('/dog', routerDog)
 router.use('/dogs', routerDogs)
-router.use('/temperament', routerTemperament)
+router.use('/temperaments', routerTemperament)
 router.use('/dogs', routerdogsById);
 
 module.exports = router;

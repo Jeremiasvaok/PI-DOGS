@@ -1,59 +1,167 @@
-import { Link } from "react-router-dom";
+import React from 'react'
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card";
-import { getAllDogs } from "../../Redux/Action"
-import { useEffect } from "react"
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import Paginacion from "../Pagination";
-import SearchBar from "../SearchBar";
-import Order from "../Order";
+import Pagination from "../Pagination";
+import ImageCard from "../../image/Cards.jpg"
+import NavBar from "../NavBar";
+import './home.css'
+import{
+  orderZA,
+  orderAZ,
+  orderByWeight,
+  getTemperaments,
+  filter,
+  filterTem,
+  getAllDogs
+} from '../../Redux/Action'
 
-export default function Home(){
+export default function Home() {
+  const dispatch = useDispatch();
+  const [order, setOrder] = useState("");
 
-    const dog = useSelector(state => state.dogs)
-    const dispatch = useDispatch()
+  const allDogs = useSelector((state) => state.dogs);
+  console.log(allDogs)
+  const allTemperaments = useSelector((state) => state.temperaments);
+  //-PAGINADO----------------------------------------
+  const [page, setPage] = useState(1);
+  const [dogsPerPage, setDogsPerPage] = useState(8);
+  const indexOfLastDog = page * dogsPerPage;
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
+  const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog);
+console.log(currentDogs)
+  const maximo = allDogs.length / dogsPerPage
 
-    useEffect(() =>{
-        dispatch(getAllDogs())
-    }, [dispatch])
-     
-    //paginacion
-    const [page, setPage] = useState(1)
-    const [dogsPerPage, setDogsPerPage] =useState(8)
-    //length 172
-    const maximo = dog.length / dogsPerPage
-    const pages = (pageNumber) => setPage(pageNumber)
-      
-    return(
-    <div>
-        <div>
-          {<Paginacion 
-              page={page}
-              setPage={setPage}
-              maximo={maximo}
-              pageNumber={pages}
-            />}
-         </div>
-         <br/>
-         <div>
-              {<Order/>}
-            </div>
-           <div className='Contenedor-card'>{
-             dog && dog?.slice(
-                (page - 1) * dogsPerPage,
-                (page - 1) * dogsPerPage + dogsPerPage).map( d =>{
-               return <Card 
+  const paginado = (pageNumber) => {
+    setPage(pageNumber);
+  };
+
+  useEffect(() => {
+    dispatch(getAllDogs());
+    dispatch(getTemperaments());
+  }, [dispatch]);
+
+
+  //-ORDENAMIENTOS----------------------------------------
+let orderA = (e) =>{
+    e.preventDefault()
+    dispatch(orderAZ())
+    setPage(1);
+    setOrder(e.target.value)
+}
+let orderZ= (e) =>{
+    e.preventDefault();
+    dispatch(orderZA())
+    setPage(1);
+    setOrder(e.target.value);
+}
+
+  //-Por peso--------------------------------------------
+  function handleSortWeight(e) {
+    e.preventDefault();
+    dispatch(orderByWeight(e.target.value));
+    setPage(1);
+    setOrder(e.target.value);
+  }
+
+  //-FILTRADOS-------------------------------------------
+  //-Por creacion----------------------------------------
+  let filterBy = (e) =>{
+    e.preventDefault();
+    dispatch(filter(e.target.value))
+    setPage(1);
+    setOrder(e.target.value);
+  }
+  let allDogss = (e)=>{
+    e.preventDefault();
+    dispatch(getAllDogs())
+    setPage(1);
+    setOrder(e.target.value);
+}
+
+  //-Por temperamento------------------------------------
+  function handleFilterByTemperament(e) {
+    e.preventDefault(e);
+    dispatch(filterTem(e.target.value));
+    setPage(1);
+    setOrder(e.target.value);
+  }
+
+  return (
+    <div className='contenedor-principal'>
+      <NavBar />
+    <div className='contenedor-orden'>
+        <button 
+      className='Boton'
+      onClick={(e)=> orderA(e)}
+      >A a Z</button>
+      <button
+      className='Boton'
+      onClick={(e)=> orderZ(e)}
+      >Z a A</button>
+        <select className='selectt' onChange={(e) => handleSortWeight(e)}>
+            <option value="" disabled selected>
+              Order by weight
+            </option>
+            <option value="weightasc">Heavier</option>
+            <option value="weightdesc">Lighter</option>
+         </select>
+      <button
+       className='Boton'
+       value='DATEBASE'
+       onClick={(e) => filterBy(e)}
+      >perros creados</button>
+      <button
+      className='Boton'
+      value='ALL'
+      onClick={(e) => allDogss(e)}
+      >todos los peroos</button>
+        </div>
+
+        <div className='contenedor-temperament'>
+          <select
+            className='selectt'
+            onChange={(e) => handleFilterByTemperament(e)}>
+            <option value="" disabled selected>
+              Filter by temperament
+            </option>
+            <option value="all">All</option>
+            {allTemperaments.map((temp) => (
+            <option key={temp.id} value={temp.name}>
+                {temp.name}
+            </option>
+            ))}
+          </select>
+      <Pagination
+         maximo={maximo}
+         pageNumber={paginado}
+      />
+      <div className='card'>
+        <ul className='grid'>
+          {" "}
+          {!currentDogs.length > 0 ?(
+        <div className='ver'>
+          <p className='verr'>Loading...</p>
+          <img src={"https://i0.wp.com/thumbs.gfycat.com/ThankfulPlushAtlanticspadefish-max-1mb.gif"} />
+        </div>
+      ) :
+          currentDogs.map((d) =>{
+            return (
+              <div className='Contenedor-card'>
+                <Card 
                key={d.id}
                id={d.id}
                name={d.name}
-               img={d.img}s
-               temperaments={d.temperaments}
-               weight={d.weight}
-             />})
-          }</div>
-           <div>{<SearchBar/>}</div>
-            <Link to='/createdog'>Create un perro</Link>
-        </div>
-    )
+               img={d.img ? d.img : ImageCard}
+               temperament={d.temperament}
+               weight_max={d.weight_max}
+               weight_min={d.weight_min}
+             />
+          </div>);
+          })}
+        </ul>
+      </div>
+    </div>
+  </div>
+  );
 }

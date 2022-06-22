@@ -1,6 +1,35 @@
- .Contenedor-principal {
-     background-color: red;
-     padding: 0;
-     margin: 0;
- }
+body{
+    background-image:  url(../../image/imagem-body.jpg)
+}
 
+
+.contenedor-h1{
+    border: 100px;
+}
+.h1-titulo{
+    color:rgb(170, 83, 1);
+    margin: 50px;
+    font-weight: bolder;
+    width: 1000px;
+    height: 100px;
+    text-align: center;
+    justify-content: center;
+    display: inline-block;
+}
+ 
+.boton-ingresar{
+    margin: 97px;
+    padding: 100px;
+    border-radius: 45px;
+    cursor: pointer;
+    font-weight: 900;
+    color:rgb(206, 22, 22);
+    background-color: rgba(255, 94, 0);
+}
+
+.boton-ingresar:hover{
+    transition: 2s;
+    color:rgb(206, 22, 22);
+    background-color: rgba(248, 53, 53);
+    padding: 90px ;
+}

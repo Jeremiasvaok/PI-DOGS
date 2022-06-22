@@ -1,24 +1,21 @@
-const  { Dog, Temperament } = require('../db')
+const  { Dog } = require('../db')
 
-const createDog = async (req,res, next) =>{
+const createDog = async (req, res, next) =>{
     try {
-         const {name, height, image, weight, years, temperament} = req.body
+         const {name, height_min, height_max, weight_min, weight_max, life_time_min, life_time_max, temperament, img} = req.body
         let createDog = await Dog.create({
             name,
-            height, 
-            weight,
-            image,
-            years,
+            height_min,
+            height_max,
+            weight_min,
+            weight_max,
+            life_time_min,
+            life_time_max,
+            temperament,
+            img,
         });
-         let tempe = await Temperament.findAll({
-             where : { 
-                name: temperament
-            },
-         });
-          await createDog.addTemperament(tempe)
+          await createDog.addTemperament(temperament)
           res.status(201).send('Nueva mascota creada');
-         //res.send(tempe)
-          //console.log(createDog)
     } catch (error) {
         next(error)
     }

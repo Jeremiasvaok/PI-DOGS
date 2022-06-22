@@ -1,0 +1,23 @@
+.Boton{
+    color: black;
+    font-weight: 250;
+    margin: 12px;
+    padding: 5px;
+    background-color: rgb(192, 141, 2);
+    border-radius: 4px;
+    border: solid rgb(193, 144, 8);
+    cursor: pointer;
+}
+.Boton:hover{
+    background-color: rgb(238, 170, 92);
+    border:solid rgb(238, 170, 92);
+}
+
+.selectt{
+    background-color: rgb(192, 141, 2);
+    font-weight: 250;
+    margin: 12px;
+    padding: 5px;
+    border-radius: 4px;
+    border: solid rgb(193, 144, 8);
+}
