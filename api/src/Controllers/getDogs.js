@@ -27,7 +27,7 @@ const getDogs = async (req, res, next) =>{
                   e.life_span.split(" - ")[1] &&
                   e.life_span.split(" - ")[1].split(" ")[0],
                 temperament: e.temperament ? e.temperament : "Unknown",
-                  img: e.image.url,
+                  image: e.image.url,
               };
             });
           const dogss = await Dog.findAll({
@@ -47,22 +47,22 @@ const getDogs = async (req, res, next) =>{
         life_time_max: e.life_time_max,
         life_time_min: e.life_time_min,
         temperament: auxi,
-        img: e.img
+        image: e.image
              }
          });
-           //console.log(dogss) /////////////////////////////REVISAR 
+ 
         let alldogs = dogsApi.concat(dogdb);
 //<---------------------------------busqueda query-------------------------------------------------------------->
-     const name = req.query.name;
-         if(name){
-        const info = await alldogs.filter((d)=> d.name.toLowerCase().includes(name.toLowerCase()));
-     info.length < 1 ? res.status(404).json('Mascota no encontrada, ingrese otro nombre valido') : 
-        res.status(200).json(info);
-         }else{
-          res.status(200).json(alldogs);
-         }
-    } catch (error) {
-       next(error);
+      const name = req.query.name;
+    if(name){
+      const info = await alldogs.filter((d)=> d.name.toLowerCase().includes(name.toLowerCase()));
+       info.length ? res.status(200).json(info) :
+       res.status(404).json('Mascota no encontrada, ingrese otro nombre valido') 
+      }else{
+      return res.status(200).json(alldogs);
     }
+      } catch (error) {
+      next(error);
+      }
 }
 module.exports = getDogs

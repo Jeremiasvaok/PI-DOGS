@@ -1,23 +1,25 @@
 import React from 'react'
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, useParams} from "react-router-dom";
 import { getDogsDetails } from '../../Redux/Action'
 import imagenDogs from '../../image/Cards.jpg'
 import './details.css'
 
-export default function Details(props){
-
-    let params= props.match.params.id
-    let dispatch = useDispatch()
-    let details = useSelector(state => state.details)
-  
+ function Details({ details, getDetails}){
+    
+   // let params = props.match.params.id
+    let { id } = useParams()
+    // let dispatch = useDispatch()
+    // let details = useSelector(state => state.details)
+    // console.log(details)
     useEffect(()=>{
-      dispatch(getDogsDetails(params))
-    }, [dispatch, params])
+      getDetails(id)
+    }, [getDetails, id])
+
     return(
         <div className='contenedor-detalle' >{
-                details ? (<div>
+                details? (<div>
                  <img className='Cards-img' src={details.image ? details.image : imagenDogs } alt={'dog'}/>
                  <p className='Cards-nombre' >Race: {details.name}</p>
                  <p className='Cards-weight' >Weight: {details.weight_min} - {details.weight_max}kg.</p> <br/><br/>
@@ -31,3 +33,15 @@ export default function Details(props){
         </div>
     )
 }
+function mapStateToProps(state){
+    return{
+        details: state.details
+    }
+}
+function mapDispatchToProps(dispatch){
+    return{
+     getDetails: id => dispatch(getDogsDetails(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Details)

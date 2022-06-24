@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card";
 import Pagination from "../Pagination";
 import ImageCard from "../../image/Cards.jpg"
+import landing from "../../image/correr-landing.png"
 import NavBar from "../NavBar";
 import './home.css'
 import{
@@ -21,7 +22,7 @@ export default function Home() {
   const [order, setOrder] = useState("");
 
   const allDogs = useSelector((state) => state.dogs);
-  console.log(allDogs)
+  console.log('longitud de dogs',allDogs)
   const allTemperaments = useSelector((state) => state.temperaments);
   //-PAGINADO----------------------------------------
   const [page, setPage] = useState(1);
@@ -29,9 +30,9 @@ export default function Home() {
   const indexOfLastDog = page * dogsPerPage;
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog);
-console.log(currentDogs)
+  console.log("curremDogs",currentDogs)
   const maximo = allDogs.length / dogsPerPage
-
+  console.log("maximo", maximo)
   const paginado = (pageNumber) => {
     setPage(pageNumber);
   };
@@ -58,7 +59,7 @@ let orderZ= (e) =>{
 
   //-Por peso--------------------------------------------
   function handleSortWeight(e) {
-    e.preventDefault();
+    e.preventDefault(e);
     dispatch(orderByWeight(e.target.value));
     setPage(1);
     setOrder(e.target.value);
@@ -67,7 +68,7 @@ let orderZ= (e) =>{
   //-FILTRADOS-------------------------------------------
   //-Por creacion----------------------------------------
   let filterBy = (e) =>{
-    e.preventDefault();
+    e.preventDefault(e);
     dispatch(filter(e.target.value))
     setPage(1);
     setOrder(e.target.value);
@@ -100,7 +101,7 @@ let orderZ= (e) =>{
       onClick={(e)=> orderZ(e)}
       >Z a A</button>
         <select className='selectt' onChange={(e) => handleSortWeight(e)}>
-            <option value="" disabled selected>
+            <option value="" disabled >
               Order by weight
             </option>
             <option value="weightasc">Heavier</option>
@@ -122,7 +123,7 @@ let orderZ= (e) =>{
           <select
             className='selectt'
             onChange={(e) => handleFilterByTemperament(e)}>
-            <option value="" disabled selected>
+            <option value="" disabled >
               Filter by temperament
             </option>
             <option value="all">All</option>
@@ -142,7 +143,7 @@ let orderZ= (e) =>{
           {!currentDogs.length > 0 ?(
         <div className='ver'>
           <p className='verr'>Loading...</p>
-          <img src={"https://i0.wp.com/thumbs.gfycat.com/ThankfulPlushAtlanticspadefish-max-1mb.gif"} />
+          <img src={`${landing}`} alt='dog' />
         </div>
       ) :
           currentDogs.map((d) =>{
@@ -152,7 +153,7 @@ let orderZ= (e) =>{
                key={d.id}
                id={d.id}
                name={d.name}
-               img={d.img ? d.img : ImageCard}
+               img={d.image ? d.image : ImageCard}
                temperament={d.temperament}
                weight_max={d.weight_max}
                weight_min={d.weight_min}

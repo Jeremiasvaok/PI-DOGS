@@ -1,13 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import App from './App'
+import Landing from '../src/Componets/Landing'
+import { MemoryRouter} from 'react-router-dom'
 
-test('renders a button to enter', () => {
-    render(<App />);
-    const linkElement = screen.getAllByText(/Entrar/i)
-    expect(linkElement).toBeTheDocument()
+test('el titulo es igual Welcome to my dog app', () => {
+        render(<Landing />, { wrapper: MemoryRouter })
+        expect(screen.getByText(/Welcome to my dogs app/i)).toBeInTheDocument()
 });
-test('renders a title', () => {
-    render(<App />)
-    const linkElement = screen.getAllByText(/BIENVENIDOS/i)
-    expect(linkElement).toBeTheDocument();
-});
+// test('renders a button to enter ', () => {
+//     const { getByText } = render(<Landing button="Clik me" />);
+//     expect(getByText("Clik me")).toBeTruthy();
+// });

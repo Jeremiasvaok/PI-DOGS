@@ -1,0 +1,37 @@
+.title{
+    text-align: center;
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #d60873, 0 0 30px #d60873,
+0 0 30px #d60873, 0 0 40px #d60873, 0 0 50px #d70873;
+font-size: 3rem;}
+
+.subTitle{
+font-weight: bold;
+text-decoration: none;
+text-align: center;
+text-shadow:  0 0 10px #fff, 0 0 20px #fff, 0 0 20px #e68873, 0 0 30px #e68873,
+0 0 30px #e68873, 0 0 40px #e68873, 0 0 50px #e68873;
+font-size: 2rem;}
+
+.navlink{
+    text-decoration: none;
+    color: black;
+    width: 300px;
+    cursor:poiter;
+}
+
+.botonn{
+    width: 200px;
+    margin: 20px;
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 800;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: burlywood;
+    border-radius: 6px;
+    border: 2px solid #8d7248;
+  }
+  
+  .botonn:hover{
+    color: #3c3d15bb;
+    background-color: #f5e2a4;}

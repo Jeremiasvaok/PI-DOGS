@@ -8,48 +8,48 @@ import './createdogs.css'
 export function Validate(input){
 let errors={}
 if (!input.name || !/^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.name)){
-  errors.name = "❌ The first letter must be uppercase";
+  errors.name = "🤔 The first letter must be uppercase";
 } else {
-errors.name = "✅Done!"
+errors.name = "🙂Done!"
 }
 
 if(!input.height_min || !/^[1-9]\d*(\.\d+)?$/.test(input.height_min)){
-  errors.height_min = '❌ Only numbers';
+  errors.height_min = '🤔 Only numbers';
 }else {
-errors.height_min = "✅Done!"
+errors.height_min = "😉Done!"
 }
 if(!input.height_max || !/^[1-9]\d*(\.\d+)?$/.test(input.height_max)){
-  errors.height_max = '❌ Only numbers';
+  errors.height_max = '🤔 Only numbers';
 } else {
-errors.height_max = "✅Done!"
+errors.height_max = "😀Done!"
 }
 if(input.height_max <= input.height_min){
-  errors.height_min = '❌ Min value cannot be greater than the max';
+  errors.height_min = '🤔 Min value cannot be greater than the max';
 }
 
 if(!input.weight_min || !/^[1-9]\d*(\.\d+)?$/.test(input.weight_min)){
-  errors.weight_min = '❌ Only numbers';
+  errors.weight_min = '🤔 Only numbers';
 }
 if(!input.weight_max || !/^[1-9]\d*(\.\d+)?$/.test(input.weight_max)){
-  errors.weight_max = '❌ Only numbers';
+  errors.weight_max = '🤔 Only numbers';
 }
 if(input.weight_max <= input.weight_min){
-  errors.weight_min = '❌ Min value cannot be greater than the max';
+  errors.weight_min = '🤔 Min value cannot be greater than the max';
 }
 if(!input.life_time_min || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_min)){
-  errors.life_time_min = '❌ Only numbers';
+  errors.life_time_min = '🤔 Only numbers';
 }
 if(!input.life_time_max || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_max)){
-errors.life_time_max = '❌ Only numbers';
+errors.life_time_max = '🤔 Only numbers';
 }
 if(input.life_time_max <= input.life_time_min){
-  errors.life_time_min = '❌ Min value cannot be greater than the max';
+  errors.life_time_min = '🤔 Min value cannot be greater than the max';
 }
-if (input.img && !/[a-z0-9-.]+\.[a-z]{2,4}\/?([^\s<>#%",{}\\|^[\]`]+)?$/.test(input.img) ){
-  errors.img = '❌ Must be an URL or be empty';
+if (input.image && !/[a-z0-9-.]+\.[a-z]{2,4}\/?([^\s<>#%",{}\\|^[\]`]+)?$/.test(input.image) ){
+  errors.image = '🤔 Must be an URL or be empty';
 }
-if (input.temperament.length <= 2){
-  errors.temperament = "❌ The dog can't have more than four temperaments!";
+if (input.temperament.length <= 1){
+  errors.temperament = "🤔 The dog can't have more than four temperaments!";
 }
 return errors
 }
@@ -67,7 +67,7 @@ export default function CreateDog(){
       life_time_min: "",
       life_time_max: "",
       temperament: [],
-      img: "",
+      image: "",
     });
     useEffect(()=>{
         dispatch(getTemperaments())
@@ -120,12 +120,11 @@ export default function CreateDog(){
           life_time_min: "",
           life_time_max: "",
           temperament: [],
-          img: "",
         })
-        alert('Tu mascota fue creada con exito!!')
+        alert('Your pet was successfully created!!')
         history.push('/home')
     }else{
-        alert('No podemos compretar la solicitud')
+        alert('We can not understand the request')
     }
  }
     return(
@@ -291,8 +290,7 @@ export default function CreateDog(){
                   className='botonTemp'
                   type="button"
                   key={el.id}
-                  onClick={() => handleDelete(el)}
-                >
+                  onClick={() => handleDelete(el)}>
                   {el}
                 </button>
               ))}
@@ -309,12 +307,8 @@ export default function CreateDog(){
         {errors.height_max && <p className='error'>{errors.height_max}</p>}
         {errors.weight_min && <p className='error'>{errors.weight_min}</p>}
         {errors.weight_max && <p className='error'>{errors.weight_max}</p>}
-        {errors.life_time_min && (
-          <p className='error'>{errors.life_time_min}</p>
-        )}
-        {errors.life_time_max && (
-          <p className='error'>{errors.life_time_max}</p>
-        )}
+        {errors.life_time_min && (<p className='error'>{errors.life_time_min}</p>)}
+        {errors.life_time_max && (<p className='error'>{errors.life_time_max}</p>)}
       </div>
     </div>
   );

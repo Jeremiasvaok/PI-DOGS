@@ -1,59 +1,42 @@
 const { Temperament, Dog, conn } = require('../../src/db.js');
 const { expect } = require('chai');
 
-describe('Dog model', () => {
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    }));
-  describe('Validators', () => {
+describe("Dog model", () => {
+  before(() =>
+    conn.authenticate().catch((err) => {
+      console.error("Unable to connect to the database:", err);
+    })
+  );
+  describe("Validators", () => {
     beforeEach(() => Dog.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
+    describe("name", () => {
+      it("should throw an error if name is null", (done) => {
         Dog.create({})
-          .then(() => done(new Error('It requires a valid name')))
+          .then(() => done(new Error("It requires a valid name")))
           .catch(() => done());
       });
-      it('should work when its a valid name', () => {
-        Dog.create({ name: 'Pug' });
+      it("should work when its a valid name", () => {
+        Dog.create({ name: "Pug", weight: "3", height: "2" });
       });
-      it('should work when its a valid height_min', () =>{
-        Dog.create({height_min: '2'})
-      })
-      it('should work when its a valid height_max', ()=>{
-        Dog.create({height_max: '6'})
-      });
-      it("should work when its a valid life_time_min:",()=>{
-        Dog.create({life_time_min:'4'})
-      });
-      it("should work when its a valid life_time_max::",()=>{
-        Dog.create({life_time_max:'7'})
+      it("name should be a string", () => {
+        expect(typeof Dog.name).equal("string");
       });
     });
   });
-});
-
-
-
-describe('Temperament model', () => {
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    }));
-  describe('Validators', () => {
+  describe("Validators2", () => {
     beforeEach(() => Temperament.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
+    describe("name", () => {
+      it("should throw an error if name is null", (done) => {
         Temperament.create({})
-          .then(() => done(new Error('It requires a valid name')))
+          .then(() => done(new Error("It requires a valid name")))
           .catch(() => done());
       });
-      it('should work when its a valid name', () => {
-        Temperament.create({ name: 'Active' });
+      it("should work when its a valid name", () => {
+        Temperament.create({ name: "happy" });
       });
-      it('should work when its a valid name', () => {
-        Temperament.create({ name: 'Agresive' });
+      it("name should be a string", () => {
+        expect(typeof Temperament.name).equal("string");
       });
-   });
- });
+    });
+  });
 });

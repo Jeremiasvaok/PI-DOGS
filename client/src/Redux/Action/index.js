@@ -11,34 +11,35 @@ export const  ORDER_BY_WEIGHT = 'ORDER_BY_WEIGHT'
 export const  DATEBASE = 'DATEBASE'
 export const  ALL = 'ALL'
 
-export const getAllDogs = () => async(dispach)=>{
-    try {
+export function getAllDogs(){
+    return async function(dispach){
         let response = await axios.get('http://localhost:3001/dogs');
-        dispach({
+       return dispach({
              type: GET_ALL_DOGS,
              payload: response.data
          });
-    } catch (error) {
-        console.log(error)
     }
 }
 
-export const getDogsDetails =(id) => async (dispach) =>{
+export function getDogsDetails(id){
+   return async function(dispach){
     try {
         const response = await axios.get(`http://localhost:3001/dogs/${id}`);
-        dispach({
-            type: GET_DOGS_DETAILS,
-            payload: response.data
- })
+  return dispach({
+              type: GET_DOGS_DETAILS,
+              payload: response.data
+   })
     } catch (error) {
         console.log(error)
-   }
+    }
+ }
 }
 
-export const searchByName = (name) => async(dispach) =>{
+export function searchByName(name){
+    return async function(dispach){
     try {
         const response = await axios.get(`http://localhost:3001/dogs?name=${name}`);
-      dispach({
+     return dispach({
          type: SEARCH_BY_NAME ,
          payload: response.data
      });
@@ -46,30 +47,33 @@ export const searchByName = (name) => async(dispach) =>{
         alert('Dogs not found')
     } 
 }
+}
 
-export const createDog = (info) => async (dispach)=>{
+export function createDog(info){
+    return async function (dispach){
     try {
     const createDog = await axios.post(`http://localhost:3001/dog`, info)
-     dispach({
+    return dispach({
             type: CREATE_DOG,
             payload: createDog
         })
         } catch (error) {
             console.log(error)
         }
+    }
 }
  
 export function getTemperaments(){
    return async function (dispach){
     var response = await axios.get('http://localhost:3001/temperaments');
-     dispach({
+    return dispach({
             type: GET_TEMPERAMENTS,
             payload: response.data
         })
     }
 }
 
-export const filterTem = (payload) =>{
+export function filterTem(payload){
     return{
         type: FILTER_TEMPERAMENTS,
         payload,
@@ -114,5 +118,7 @@ export const orderByWeight = (payload) =>{
 }
 
 export const filter = (value) =>{
-    if(value === 'DATEBASE') return{ type: DATEBASE, }
+    if(value === 'DATEBASE'){
+        return{ type: DATEBASE, }
+    } 
 }

@@ -15,7 +15,7 @@ import {
 const initialState={
     dogs: [],
     temperaments:[],
-    details:[],
+    details:{},
     allDogs:[]
 };
 function rootReducer(state= initialState, action){
@@ -81,6 +81,7 @@ function rootReducer(state= initialState, action){
             }
             case FILTER_TEMPERAMENTS:
             const allDogs = state.allDogs;
+            // console.log(allDogs)
             const temperamentsFilter = action.payload === "all" ? allDogs : allDogs.filter((el) => {
               return el.temperament?.split(", ").includes(action.payload)
             })

@@ -55,7 +55,6 @@
     flex-direction: row;
 }
 .row{
-    color:red;
     display: flex;
     flex-direction: column;
 }
@@ -70,10 +69,12 @@ input{
     margin-left: 5%;
     margin: auto;
     padding: auto;
+    color:red;
     font-weight: 800;
 }
+
 .li{
-  color:red; 
+  color: rgb(236, 160, 88);
 }
 .botonTemp{
     color:rgb(0, 0, 0);

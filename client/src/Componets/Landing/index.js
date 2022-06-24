@@ -2,19 +2,13 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import './landing.css';
 
-export default function landings(){
+export default function Landing(){
     return(
-        <div className="Contenedor-principal">
-            <div className="contenedor-h1">
-                <h1 className="h1-titulo">WELCOME TO MY DOG APP!</h1>
-            </div>
-            <div className="contenedor-boton">
-                <Link to='/home'>
-                    <button className="boton-ingresar">GET INTO!</button>
-                </Link>
-               
-            </div>
-
-        </div>
+           <div className='grid-text'>
+                    <h1 className='grid_title'>Welcome to my dog app</h1>
+                    <Link to='/home'>
+                    <button className='grid_title--trasform'>Clik me</button>
+                    </Link>
+           </div>
     )
 }

@@ -20,7 +20,7 @@ export default function SearchBar(){
             console.log(input)
         }
     return(
-    <div clasName='contenedor-ser'>
+    <div className='contenedor-ser'>
         <form className='contenedor-from' onSubmit={handleSubmit}>
             <input
             className='input-search'
