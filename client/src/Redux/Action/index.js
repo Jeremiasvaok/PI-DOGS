@@ -13,7 +13,7 @@ export const  ALL = 'ALL'
 
 export function getAllDogs(){
     return async function(dispach){
-        let response = await axios.get('http://localhost:3001/dogs');
+        let response = await axios.get('/dogs');
        return dispach({
              type: GET_ALL_DOGS,
              payload: response.data
@@ -24,7 +24,7 @@ export function getAllDogs(){
 export function getDogsDetails(id){
    return async function(dispach){
     try {
-        const response = await axios.get(`http://localhost:3001/dogs/${id}`);
+        const response = await axios.get(`/dogs/${id}`);
   return dispach({
               type: GET_DOGS_DETAILS,
               payload: response.data
@@ -38,7 +38,7 @@ export function getDogsDetails(id){
 export function searchByName(name){
     return async function(dispach){
     try {
-        const response = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+        const response = await axios.get(`/dogs?name=${name}`);
      return dispach({
          type: SEARCH_BY_NAME ,
          payload: response.data
@@ -52,7 +52,7 @@ export function searchByName(name){
 export function createDog(info){
     return async function (dispach){
     try {
-    const createDog = await axios.post(`http://localhost:3001/dog`, info)
+    const createDog = await axios.post(`/dog`, info)
     return dispach({
             type: CREATE_DOG,
             payload: createDog
@@ -65,7 +65,7 @@ export function createDog(info){
  
 export function getTemperaments(){
    return async function (dispach){
-    var response = await axios.get('http://localhost:3001/temperaments');
+    var response = await axios.get('/temperaments');
     return dispach({
             type: GET_TEMPERAMENTS,
             payload: response.data
@@ -81,7 +81,7 @@ export function filterTem(payload){
 }
 
 export const orderAZ = () => async (dispach)=>{
-    const response = await axios.get('http://localhost:3001/dogs');
+    const response = await axios.get('/dogs');
     const aOrder = response.data.sort((a,b) =>{
         if(a.name > b.name) return 1;
         if(a.name < b.name) return -1;
@@ -95,7 +95,7 @@ export const orderAZ = () => async (dispach)=>{
 
 export const orderZA = () => async (dispach)=>{
     try{
-        const response = await axios.get('http://localhost:3001/dogs');
+        const response = await axios.get('/dogs');
     const zOrder = response.data.sort((b, a) => {
         if (a.name > b.name) return 1;
         if (a.name < b.name) return -1;
